@@ -113,6 +113,17 @@ export async function initializeDatabase(pool) {
       )
     `);
 
+    // Inventory types (dynamic fish breeds/species)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS inventory_types (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        name VARCHAR(100) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(user_id, name)
+      )
+    `);
+
     console.log('✓ Database schema initialized');
   } finally {
     client.release();

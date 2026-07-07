@@ -3,7 +3,9 @@ import { useStore } from '../store';
 
 export default function InventoryPage() {
   const [inventory, setInventory] = useState([]);
+  const [inventoryTypes, setInventoryTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('');
+  const [newTypeName, setNewTypeName] = useState('');
   const [quantity, setQuantity] = useState('');
   const [reason, setReason] = useState('');
   const [adjustmentHistory, setAdjustmentHistory] = useState([]);
@@ -12,8 +14,23 @@ export default function InventoryPage() {
   const { token } = useStore();
 
   useEffect(() => {
+    fetchInventoryTypes();
     fetchInventory();
   }, [token]);
+
+  const fetchInventoryTypes = async () => {
+    try {
+      const response = await fetch('/api/inventory/types', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setInventoryTypes(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch inventory types:', error);
+    }
+  };
 
   const fetchInventory = async () => {
     try {
@@ -86,9 +103,9 @@ export default function InventoryPage() {
     }
   };
 
-  const handleViewHistory = async (type) => {
+  const handleViewHistory = async (typeName) => {
     try {
-      const response = await fetch(`/api/inventory/history/${type}`, {
+      const response = await fetch(`/api/inventory/history/${typeName}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
@@ -100,70 +117,148 @@ export default function InventoryPage() {
     }
   };
 
-  const inventoryTypes = ['Purple Mystery Snails', 'Magenta Mystery Snails'];
+  const handleAddInventoryType = async (e) => {
+    e.preventDefault();
+    if (!newTypeName.trim()) {
+      alert('Please enter a type name');
+      return;
+    }
 
-  const currentItem = inventory.find((inv) => inv.item_type === selectedType);
+    try {
+      const response = await fetch('/api/inventory/types', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name: newTypeName }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setInventoryTypes([...inventoryTypes, data]);
+        setNewTypeName('');
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Failed to add type');
+      }
+    } catch (error) {
+      console.error('Failed to add type:', error);
+      alert('Error adding type');
+    }
+  };
+
+  const handleDeleteType = async (typeId) => {
+    if (!confirm('Delete this fish breed? Associated inventory will not be deleted.')) return;
+
+    try {
+      const response = await fetch(`/api/inventory/types/${typeId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.ok) {
+        setInventoryTypes(inventoryTypes.filter((t) => t.id !== typeId));
+      }
+    } catch (error) {
+      console.error('Failed to delete type:', error);
+    }
+  };
 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Inventory</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {inventoryTypes.map((type) => {
-          const item = inventory.find((inv) => inv.item_type === type);
-          return (
-            <div key={type} className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-4">{type}</h3>
-              {item ? (
-                <>
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="text-center">
-                      <div className="text-gray-600 text-xs font-semibold uppercase">Stock</div>
-                      <div className="text-3xl font-bold text-gray-800 mt-2">{item.quantity}</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-gray-600 text-xs font-semibold uppercase">Reserved</div>
-                      <div className="text-3xl font-bold text-gray-800 mt-2">{item.reserved_quantity || 0}</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-gray-600 text-xs font-semibold uppercase">Available</div>
-                      <div className="text-3xl font-bold text-green-600 mt-2">
-                        {item.quantity - (item.reserved_quantity || 0)}
+      <div className="bg-white rounded-lg shadow p-6">
+        <h2 className="text-lg font-bold text-gray-800 mb-4">Add Fish Breed</h2>
+        <form onSubmit={handleAddInventoryType} className="flex gap-2">
+          <input
+            type="text"
+            value={newTypeName}
+            onChange={(e) => setNewTypeName(e.target.value)}
+            placeholder="e.g., Blue Mystery Snails, Nerite Snails..."
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition"
+          >
+            Add Type
+          </button>
+        </form>
+      </div>
+
+      {inventoryTypes.length === 0 ? (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+          <p className="text-gray-600 mb-4">No fish breeds added yet. Add your first one above!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {inventoryTypes.map((type) => {
+            const item = inventory.find((inv) => inv.item_type === type.name);
+            return (
+              <div key={type.id} className="bg-white rounded-lg shadow p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-lg font-bold text-gray-800">{type.name}</h3>
+                  <button
+                    onClick={() => handleDeleteType(type.id)}
+                    className="text-red-500 hover:text-red-700 text-sm"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {item ? (
+                  <>
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                      <div className="text-center">
+                        <div className="text-gray-600 text-xs font-semibold uppercase">Stock</div>
+                        <div className="text-3xl font-bold text-gray-800 mt-2">{item.quantity}</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-gray-600 text-xs font-semibold uppercase">Reserved</div>
+                        <div className="text-3xl font-bold text-gray-800 mt-2">{item.reserved_quantity || 0}</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-gray-600 text-xs font-semibold uppercase">Available</div>
+                        <div className="text-3xl font-bold text-green-600 mt-2">
+                          {item.quantity - (item.reserved_quantity || 0)}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex gap-2 mb-4">
-                    <button
-                      onClick={() => handleAdjustQuantity(type, 1)}
-                      className="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md transition"
-                    >
-                      +1
-                    </button>
-                    <button
-                      onClick={() => handleAdjustQuantity(type, -1)}
-                      className="flex-1 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md transition"
-                    >
-                      -1
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSelectedType(type);
-                        handleViewHistory(type);
-                      }}
-                      className="flex-1 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition text-sm"
-                    >
-                      History
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="text-center py-4 text-gray-500">No inventory data</div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                    <div className="flex gap-2 mb-4">
+                      <button
+                        onClick={() => handleAdjustQuantity(type.name, 1)}
+                        className="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md transition"
+                      >
+                        +1
+                      </button>
+                      <button
+                        onClick={() => handleAdjustQuantity(type.name, -1)}
+                        className="flex-1 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md transition"
+                      >
+                        -1
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedType(type.name);
+                          handleViewHistory(type.name);
+                        }}
+                        className="flex-1 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition text-sm"
+                      >
+                        History
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-center py-4 text-gray-500">No inventory data</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-lg font-bold text-gray-800 mb-4">Manual Inventory Update</h2>
@@ -171,7 +266,7 @@ export default function InventoryPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label htmlFor="itemType" className="block text-sm font-medium text-gray-700">
-                Item Type
+                Fish Breed
               </label>
               <select
                 id="itemType"
@@ -179,10 +274,10 @@ export default function InventoryPage() {
                 onChange={(e) => setSelectedType(e.target.value)}
                 className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
               >
-                <option value="">Select type</option>
+                <option value="">Select breed</option>
                 {inventoryTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
+                  <option key={type.id} value={type.name}>
+                    {type.name}
                   </option>
                 ))}
               </select>

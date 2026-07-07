@@ -6,6 +6,53 @@ export default function inventoryRoutes(pool, io) {
 
   router.use(verifyAuth);
 
+  // Get all inventory types for user
+  router.get('/types', async (req, res) => {
+    try {
+      const result = await pool.query(
+        'SELECT * FROM inventory_types WHERE user_id = $1 ORDER BY name ASC',
+        [req.userId]
+      );
+      res.json(result.rows);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Add new inventory type
+  router.post('/types', async (req, res) => {
+    const { name } = req.body;
+    try {
+      if (!name || name.trim().length === 0) {
+        return res.status(400).json({ error: 'Type name is required' });
+      }
+      const result = await pool.query(
+        'INSERT INTO inventory_types (user_id, name) VALUES ($1, $2) RETURNING *',
+        [req.userId, name.trim()]
+      );
+      res.json(result.rows[0]);
+    } catch (err) {
+      if (err.code === '23505') {
+        res.status(400).json({ error: 'This inventory type already exists' });
+      } else {
+        res.status(500).json({ error: err.message });
+      }
+    }
+  });
+
+  // Delete inventory type
+  router.delete('/types/:id', async (req, res) => {
+    try {
+      await pool.query(
+        'DELETE FROM inventory_types WHERE id = $1 AND user_id = $2',
+        [req.params.id, req.userId]
+      );
+      res.json({ success: true });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // Get all inventory
   router.get('/', async (req, res) => {
     try {
