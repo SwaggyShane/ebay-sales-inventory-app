@@ -146,34 +146,23 @@ All tables are automatically created on server startup.
 
 ## Deployment to Railway
 
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
+For detailed step-by-step instructions, see [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
 
-2. **Connect to Railway**
-   - Go to [railway.app](https://railway.app)
-   - Create new project from GitHub repository
-   - Connect your GitHub account and select this repository
+**Quick Start:**
 
-3. **Configure Environment Variables**
-   - In Railway dashboard, go to Variables
-   - Add all variables from `.env`:
-     - `DATABASE_URL` (Railway creates this automatically)
-     - `JWT_SECRET`
-     - `EBAY_APP_ID`
-     - `EBAY_DEV_ID`
-     - `EBAY_AUTH_TOKEN`
-     - `NODE_ENV=production`
+1. Push to GitHub
+2. Connect repo to [railway.app](https://railway.app)
+3. Add PostgreSQL database (Railway plugin)
+4. Configure environment variables (JWT_SECRET, eBay credentials)
+5. Set custom domain: `aquatics.narmir-reborn.com`
+6. Update DNS records at your domain registrar
+7. Deploy — Railway auto-deploys on push to main
 
-4. **Set Custom Domain**
-   - In Railway project settings, add custom domain: `snails.narmir-reborn.com`
-
-5. **Deploy**
-   - Railway automatically deploys on push to main
-   - The Procfile specifies build and start commands
+**Custom Domain Setup:**
+- Railway provides DNS records
+- Add CNAME or A record to your DNS provider pointing to Railway
+- Wait for DNS propagation (5-30 minutes)
+- Visit `https://aquatics.narmir-reborn.com`
 
 ## Security Considerations
 
