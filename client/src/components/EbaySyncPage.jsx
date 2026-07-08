@@ -132,7 +132,7 @@ export default function EbaySyncPage() {
               <button
                 type="submit"
                 disabled={configuring}
-                className="w-full py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md disabled:opacity-50"
+                className="w-full py-2 btn-glow bg-blue-900  text-white font-semibold rounded-md disabled:opacity-50"
               >
                 {configuring ? 'Configuring...' : 'Configure Credentials'}
               </button>
@@ -161,7 +161,7 @@ export default function EbaySyncPage() {
             <button
               onClick={handleStartSync}
               disabled={syncing}
-              className="w-full py-3 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-bold rounded-md disabled:opacity-50 text-lg"
+              className="w-full py-3 btn-glow bg-blue-900  text-white font-bold rounded-md disabled:opacity-50 text-lg"
             >
               {syncing ? 'Syncing...' : 'Start Sync Now'}
             </button>
@@ -209,7 +209,7 @@ export default function EbaySyncPage() {
                       {new Date(sync.created_at).toLocaleString()}
                     </td>
                     <td className="px-6 py-3 text-sm text-gray-100">
-                      <span className="px-2 py-1 bg-blue-900 text-blue-200 rounded text-xs font-semibold">
+                      <span className="px-2 py-1 btn-glow bg-blue-900 text-blue-200 rounded text-xs font-semibold">
                         {sync.sync_type}
                       </span>
                     </td>

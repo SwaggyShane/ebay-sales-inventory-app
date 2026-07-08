@@ -16,3 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.btn-glow:hover {
+  box-shadow: 0 0 4px rgba(30, 58, 138, 0.8);
+}
