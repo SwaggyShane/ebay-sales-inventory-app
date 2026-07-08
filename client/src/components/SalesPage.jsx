@@ -124,15 +124,15 @@ export default function SalesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Sales</h1>
+      <h1 className="text-3xl font-bold text-gray-100">Sales</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">Add Sale</h2>
+          <div className="bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-lg font-bold text-gray-100 mb-4">Add Sale</h2>
             <form onSubmit={handleAddSale} className="space-y-4">
               <div>
-                <label htmlFor="customer_id" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="customer_id" className="block text-sm font-medium text-gray-300">
                   Customer *
                 </label>
                 <select
@@ -140,7 +140,7 @@ export default function SalesPage() {
                   name="customer_id"
                   value={formData.customer_id}
                   onChange={handleInputChange}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                 >
                   <option value="">Select customer</option>
                   {customers.map((customer) => (
@@ -152,7 +152,7 @@ export default function SalesPage() {
               </div>
 
               <div>
-                <label htmlFor="item_title" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="item_title" className="block text-sm font-medium text-gray-300">
                   Item Title *
                 </label>
                 <input
@@ -161,14 +161,14 @@ export default function SalesPage() {
                   name="item_title"
                   value={formData.item_title}
                   onChange={handleInputChange}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                   placeholder="Item name"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="quantity" className="block text-sm font-medium text-gray-300">
                     Quantity
                   </label>
                   <input
@@ -178,11 +178,11 @@ export default function SalesPage() {
                     value={formData.quantity}
                     onChange={handleInputChange}
                     min="1"
-                    className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                 </div>
                 <div>
-                  <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="price" className="block text-sm font-medium text-gray-300">
                     Price
                   </label>
                   <input
@@ -193,18 +193,18 @@ export default function SalesPage() {
                     onChange={handleInputChange}
                     step="0.01"
                     min="0"
-                    className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                 </div>
               </div>
 
               <div className="bg-blue-50 p-3 rounded-md">
-                <div className="text-sm text-gray-600">Total:</div>
-                <div className="text-2xl font-bold text-blue-600">${total_amount.toFixed(2)}</div>
+                <div className="text-sm text-gray-400">Total:</div>
+                <div className="text-2xl font-bold text-blue-400">${total_amount.toFixed(2)}</div>
               </div>
 
               <div>
-                <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="notes" className="block text-sm font-medium text-gray-300">
                   Notes
                 </label>
                 <textarea
@@ -212,7 +212,7 @@ export default function SalesPage() {
                   name="notes"
                   value={formData.notes}
                   onChange={handleInputChange}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                   placeholder="Sale notes"
                   rows="2"
                 />
@@ -221,7 +221,7 @@ export default function SalesPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition disabled:opacity-50"
+                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition disabled:opacity-50"
               >
                 {loading ? 'Adding...' : 'Add Sale'}
               </button>
@@ -230,45 +230,45 @@ export default function SalesPage() {
         </div>
 
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
             <div className="px-6 py-4 border-b">
-              <h2 className="text-lg font-bold text-gray-800">Recent Sales</h2>
+              <h2 className="text-lg font-bold text-gray-100">Recent Sales</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-gray-700 border-b">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Customer</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Item</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Qty</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Amount</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Action</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Customer</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Item</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Qty</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Amount</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {sales.length === 0 ? (
                     <tr>
-                      <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                      <td colSpan="6" className="px-6 py-4 text-center text-gray-400">
                         No sales found
                       </td>
                     </tr>
                   ) : (
                     sales.map((sale) => (
-                      <tr key={sale.id} className="border-b hover:bg-gray-50">
-                        <td className="px-6 py-3 text-sm text-gray-600">
+                      <tr key={sale.id} className="border-b hover:bg-gray-700">
+                        <td className="px-6 py-3 text-sm text-gray-400">
                           {new Date(sale.sale_date).toLocaleDateString()}
                         </td>
-                        <td className="px-6 py-3 text-sm text-gray-800">{sale.ebay_username}</td>
-                        <td className="px-6 py-3 text-sm text-gray-600">{sale.item_title}</td>
-                        <td className="px-6 py-3 text-sm text-gray-600">{sale.quantity}</td>
-                        <td className="px-6 py-3 text-sm font-semibold text-gray-800">
+                        <td className="px-6 py-3 text-sm text-gray-100">{sale.ebay_username}</td>
+                        <td className="px-6 py-3 text-sm text-gray-400">{sale.item_title}</td>
+                        <td className="px-6 py-3 text-sm text-gray-400">{sale.quantity}</td>
+                        <td className="px-6 py-3 text-sm font-semibold text-gray-100">
                           ${parseFloat(sale.total_amount).toFixed(2)}
                         </td>
                         <td className="px-6 py-3 text-sm">
                           <button
                             onClick={() => handleDeleteSale(sale.id)}
-                            className="text-red-500 hover:text-red-700 font-medium"
+                            className="text-red-500 hover:text-red-200 font-medium"
                           >
                             Delete
                           </button>

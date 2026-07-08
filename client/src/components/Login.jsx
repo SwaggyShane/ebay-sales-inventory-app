@@ -39,15 +39,15 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-blue-600">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md">
+        <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">
           eBay Sales Manager
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
               Email
             </label>
             <input
@@ -56,13 +56,13 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="mt-1 w-full px-4 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none"
               placeholder="your@email.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-300">
               Password
             </label>
             <input
@@ -71,17 +71,17 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="mt-1 w-full px-4 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none"
               placeholder="••••••••"
             />
           </div>
 
-          {error && <div className="p-3 bg-red-100 text-red-700 rounded-lg text-sm">{error}</div>}
+          {error && <div className="p-3 bg-red-900/50 text-red-200 rounded-lg text-sm">{error}</div>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition disabled:opacity-50"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition disabled:opacity-50"
           >
             {loading ? 'Loading...' : isSignup ? 'Sign Up' : 'Log In'}
           </button>
@@ -91,7 +91,7 @@ export default function Login() {
           <button
             type="button"
             onClick={() => setIsSignup(!isSignup)}
-            className="text-sm text-blue-500 hover:text-blue-700 font-medium"
+            className="text-sm text-blue-400 hover:text-blue-300 font-medium"
           >
             {isSignup ? 'Already have an account? Log In' : "Don't have an account? Sign Up"}
           </button>

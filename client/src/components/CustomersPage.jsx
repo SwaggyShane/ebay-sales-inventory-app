@@ -74,15 +74,15 @@ export default function CustomersPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Customers</h1>
+      <h1 className="text-3xl font-bold text-gray-100">Customers</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">Add Customer</h2>
+          <div className="bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-lg font-bold text-gray-100 mb-4">Add Customer</h2>
             <form onSubmit={handleAddCustomer} className="space-y-4">
               <div>
-                <label htmlFor="ebay_username" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="ebay_username" className="block text-sm font-medium text-gray-300">
                   eBay Username
                 </label>
                 <input
@@ -90,20 +90,20 @@ export default function CustomersPage() {
                   type="text"
                   value={newCustomer}
                   onChange={(e) => setNewCustomer(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                   placeholder="ebay_username"
                 />
               </div>
 
               <div>
-                <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="notes" className="block text-sm font-medium text-gray-300">
                   Notes
                 </label>
                 <textarea
                   id="notes"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="mt-1 w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                   placeholder="Customer notes"
                   rows="3"
                 />
@@ -112,25 +112,25 @@ export default function CustomersPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition disabled:opacity-50"
+                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition disabled:opacity-50"
               >
                 {loading ? 'Adding...' : 'Add Customer'}
               </button>
             </form>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 mt-6">
-            <h2 className="text-lg font-bold text-gray-800 mb-4">Filters & Sort</h2>
+          <div className="bg-gray-800 rounded-lg shadow p-6 mt-6">
+            <h2 className="text-lg font-bold text-gray-100 mb-4">Filters & Sort</h2>
             <div className="space-y-4">
               <div>
-                <label htmlFor="filter" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="filter" className="block text-sm font-medium text-gray-300 mb-2">
                   Filter By
                 </label>
                 <select
                   id="filter"
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                 >
                   <option value="all">All Customers</option>
                   <option value="return_customers">Return Customers</option>
@@ -139,14 +139,14 @@ export default function CustomersPage() {
               </div>
 
               <div>
-                <label htmlFor="sortBy" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="sortBy" className="block text-sm font-medium text-gray-300 mb-2">
                   Sort By
                 </label>
                 <select
                   id="sortBy"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                 >
                   <option value="">None</option>
                   <option value="lifetime_amount">Lifetime Amount</option>
@@ -159,34 +159,34 @@ export default function CustomersPage() {
         </div>
 
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
             <table className="w-full">
-              <thead className="bg-gray-100 border-b">
+              <thead className="bg-gray-700 border-b-gray-600 border-b">
                 <tr>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">Username</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">Purchases</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">Spent</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">Avg Ticket</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">Status</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">Action</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-100">Username</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-100">Purchases</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-100">Spent</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-100">Avg Ticket</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-100">Status</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-100">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {customers.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                    <td colSpan="6" className="px-6 py-4 text-center text-gray-400">
                       No customers found
                     </td>
                   </tr>
                 ) : (
                   customers.map((customer) => (
-                    <tr key={customer.id} className="border-b hover:bg-gray-50">
-                      <td className="px-6 py-3 text-sm text-gray-800">{customer.ebay_username}</td>
-                      <td className="px-6 py-3 text-sm text-gray-600">{customer.purchase_count}</td>
-                      <td className="px-6 py-3 text-sm text-gray-600">
+                    <tr key={customer.id} className="border-b hover:bg-gray-700">
+                      <td className="px-6 py-3 text-sm text-gray-100">{customer.ebay_username}</td>
+                      <td className="px-6 py-3 text-sm text-gray-400">{customer.purchase_count}</td>
+                      <td className="px-6 py-3 text-sm text-gray-400">
                         ${parseFloat(customer.lifetime_spent || 0).toFixed(2)}
                       </td>
-                      <td className="px-6 py-3 text-sm text-gray-600">
+                      <td className="px-6 py-3 text-sm text-gray-400">
                         ${parseFloat(customer.average_ticket || 0).toFixed(2)}
                       </td>
                       <td className="px-6 py-3 text-sm">
@@ -195,7 +195,7 @@ export default function CustomersPage() {
                             Repeat
                           </span>
                         ) : (
-                          <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs">
+                          <span className="px-2 py-1 bg-gray-100 text-gray-100 rounded text-xs">
                             New
                           </span>
                         )}

@@ -167,21 +167,21 @@ export default function InventoryPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">Inventory</h1>
+      <h1 className="text-3xl font-bold text-gray-100">Inventory</h1>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Add Fish Breed</h2>
+      <div className="bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-lg font-bold text-gray-100 mb-4">Add Fish Breed</h2>
         <form onSubmit={handleAddInventoryType} className="flex gap-2">
           <input
             type="text"
             value={newTypeName}
             onChange={(e) => setNewTypeName(e.target.value)}
             placeholder="e.g., Blue Mystery Snails, Nerite Snails..."
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            className="flex-1 px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition"
           >
             Add Type
           </button>
@@ -189,20 +189,20 @@ export default function InventoryPage() {
       </div>
 
       {inventoryTypes.length === 0 ? (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-          <p className="text-gray-600 mb-4">No fish breeds added yet. Add your first one above!</p>
+        <div className="bg-gray-800 border border-blue-500/30 rounded-lg p-6 text-center">
+          <p className="text-gray-400 mb-4">No fish breeds added yet. Add your first one above!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {inventoryTypes.map((type) => {
             const item = inventory.find((inv) => inv.item_type === type.name);
             return (
-              <div key={type.id} className="bg-white rounded-lg shadow p-6">
+              <div key={type.id} className="bg-gray-800 rounded-lg shadow p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-lg font-bold text-gray-800">{type.name}</h3>
+                  <h3 className="text-lg font-bold text-gray-100">{type.name}</h3>
                   <button
                     onClick={() => handleDeleteType(type.id)}
-                    className="text-red-500 hover:text-red-700 text-sm"
+                    className="text-red-400 hover:text-red-300 text-sm"
                   >
                     ✕
                   </button>
@@ -212,16 +212,16 @@ export default function InventoryPage() {
                   <>
                     <div className="grid grid-cols-3 gap-4 mb-6">
                       <div className="text-center">
-                        <div className="text-gray-600 text-xs font-semibold uppercase">Stock</div>
-                        <div className="text-3xl font-bold text-gray-800 mt-2">{item.quantity}</div>
+                        <div className="text-gray-400 text-xs font-semibold uppercase">Stock</div>
+                        <div className="text-3xl font-bold text-gray-100 mt-2">{item.quantity}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-gray-600 text-xs font-semibold uppercase">Reserved</div>
-                        <div className="text-3xl font-bold text-gray-800 mt-2">{item.reserved_quantity || 0}</div>
+                        <div className="text-gray-400 text-xs font-semibold uppercase">Reserved</div>
+                        <div className="text-3xl font-bold text-gray-100 mt-2">{item.reserved_quantity || 0}</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-gray-600 text-xs font-semibold uppercase">Available</div>
-                        <div className="text-3xl font-bold text-green-600 mt-2">
+                        <div className="text-gray-400 text-xs font-semibold uppercase">Available</div>
+                        <div className="text-3xl font-bold text-green-400 mt-2">
                           {item.quantity - (item.reserved_quantity || 0)}
                         </div>
                       </div>
@@ -230,13 +230,13 @@ export default function InventoryPage() {
                     <div className="flex gap-2 mb-4">
                       <button
                         onClick={() => handleAdjustQuantity(type.name, 1)}
-                        className="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md transition"
+                        className="flex-1 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition"
                       >
                         +1
                       </button>
                       <button
                         onClick={() => handleAdjustQuantity(type.name, -1)}
-                        className="flex-1 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md transition"
+                        className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition"
                       >
                         -1
                       </button>
@@ -245,7 +245,7 @@ export default function InventoryPage() {
                           setSelectedType(type.name);
                           handleViewHistory(type.name);
                         }}
-                        className="flex-1 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition text-sm"
+                        className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition text-sm"
                       >
                         History
                       </button>
@@ -260,19 +260,19 @@ export default function InventoryPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-bold text-gray-800 mb-4">Manual Inventory Update</h2>
+      <div className="bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-lg font-bold text-gray-100 mb-4">Manual Inventory Update</h2>
         <form onSubmit={handleSetInventory} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="itemType" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="itemType" className="block text-sm font-medium text-gray-300">
                 Fish Breed
               </label>
               <select
                 id="itemType"
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                className="mt-1 w-full px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
               >
                 <option value="">Select breed</option>
                 {inventoryTypes.map((type) => (
@@ -284,7 +284,7 @@ export default function InventoryPage() {
             </div>
 
             <div>
-              <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="quantity" className="block text-sm font-medium text-gray-300">
                 Quantity
               </label>
               <input
@@ -293,13 +293,13 @@ export default function InventoryPage() {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 min="0"
-                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                className="mt-1 w-full px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                 placeholder="0"
               />
             </div>
 
             <div>
-              <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="reason" className="block text-sm font-medium text-gray-300">
                 Reason (Optional)
               </label>
               <input
@@ -307,7 +307,7 @@ export default function InventoryPage() {
                 type="text"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                className="mt-1 w-full px-3 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
                 placeholder="Recount, new shipment, etc."
               />
             </div>
@@ -316,7 +316,7 @@ export default function InventoryPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition disabled:opacity-50"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition disabled:opacity-50"
           >
             {loading ? 'Updating...' : 'Set Inventory'}
           </button>
@@ -324,35 +324,35 @@ export default function InventoryPage() {
       </div>
 
       {adjustmentHistory.length > 0 && (
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-bold text-gray-800 mb-4">Adjustment History</h2>
+        <div className="bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-lg font-bold text-gray-100 mb-4">Adjustment History</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b">
+              <thead className="bg-gray-700 border-b border-gray-600">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Type</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Change</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700">Reason</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Type</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Change</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-300">Reason</th>
                 </tr>
               </thead>
               <tbody>
                 {adjustmentHistory.map((adj) => (
-                  <tr key={adj.id} className="border-b hover:bg-gray-50">
-                    <td className="px-6 py-3 text-sm text-gray-600">
+                  <tr key={adj.id} className="border-b border-gray-700 hover:bg-gray-700/50">
+                    <td className="px-6 py-3 text-sm text-gray-400">
                       {new Date(adj.created_at).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-3 text-sm text-gray-800">
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-semibold">
+                    <td className="px-6 py-3 text-sm text-gray-100">
+                      <span className="px-2 py-1 bg-blue-900 text-blue-200 rounded text-xs font-semibold">
                         {adj.adjustment_type}
                       </span>
                     </td>
                     <td className="px-6 py-3 text-sm font-semibold">
-                      <span className={adj.quantity_change > 0 ? 'text-green-600' : 'text-red-600'}>
+                      <span className={adj.quantity_change > 0 ? 'text-green-400' : 'text-red-400'}>
                         {adj.quantity_change > 0 ? '+' : ''}{adj.quantity_change}
                       </span>
                     </td>
-                    <td className="px-6 py-3 text-sm text-gray-600">{adj.reason}</td>
+                    <td className="px-6 py-3 text-sm text-gray-400">{adj.reason}</td>
                   </tr>
                 ))}
               </tbody>

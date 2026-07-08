@@ -31,7 +31,7 @@ export default function App() {
     }
   };
 
-  return <main className="min-h-screen bg-gray-50">
+  return <main className="min-h-screen bg-gray-900 text-gray-100 dark">
     {token && user ? <Dashboard /> : <Login />}
   </main>;
 }
