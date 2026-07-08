@@ -181,7 +181,7 @@ export default function InventoryPage() {
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md"
+            className="px-4 py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md"
           >
             Add Type
           </button>
@@ -230,13 +230,13 @@ export default function InventoryPage() {
                     <div className="flex gap-2 mb-4">
                       <button
                         onClick={() => handleAdjustQuantity(type.name, 1)}
-                        className="flex-1 py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md"
+                        className="flex-1 py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md"
                       >
                         +1
                       </button>
                       <button
                         onClick={() => handleAdjustQuantity(type.name, -1)}
-                        className="flex-1 py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md"
+                        className="flex-1 py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md"
                       >
                         -1
                       </button>
@@ -245,7 +245,7 @@ export default function InventoryPage() {
                           setSelectedType(type.name);
                           handleViewHistory(type.name);
                         }}
-                        className="flex-1 py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md text-sm"
+                        className="flex-1 py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md text-sm"
                       >
                         History
                       </button>
@@ -316,7 +316,7 @@ export default function InventoryPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md disabled:opacity-50"
+            className="w-full py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md disabled:opacity-50"
           >
             {loading ? 'Updating...' : 'Set Inventory'}
           </button>

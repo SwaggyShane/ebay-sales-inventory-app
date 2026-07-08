@@ -221,7 +221,7 @@ export default function SalesPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md disabled:opacity-50"
+                className="w-full py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md disabled:opacity-50"
               >
                 {loading ? 'Adding...' : 'Add Sale'}
               </button>

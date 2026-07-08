@@ -132,7 +132,7 @@ export default function EbaySyncPage() {
               <button
                 type="submit"
                 disabled={configuring}
-                className="w-full py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-semibold rounded-md disabled:opacity-50"
+                className="w-full py-2 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-semibold rounded-md disabled:opacity-50"
               >
                 {configuring ? 'Configuring...' : 'Configure Credentials'}
               </button>
@@ -161,7 +161,7 @@ export default function EbaySyncPage() {
             <button
               onClick={handleStartSync}
               disabled={syncing}
-              className="w-full py-3 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white font-bold rounded-md disabled:opacity-50 text-lg"
+              className="w-full py-3 bg-blue-900 hover:shadow-md hover:shadow-blue-400/60 text-white font-bold rounded-md disabled:opacity-50 text-lg"
             >
               {syncing ? 'Syncing...' : 'Start Sync Now'}
             </button>
