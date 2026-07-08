@@ -1,19 +1,11 @@
 import { useEffect } from 'react';
 import { useStore } from '../store';
 
-function StatCard({ label, value, color }) {
-  const colorMap = {
-    'border-blue-500': '#3b82f6',
-    'border-green-500': '#10b981',
-    'border-purple-500': '#a855f7',
-    'border-orange-500': '#f97316',
-  };
-
-  const colorValue = colorMap[color] || '#3b82f6';
+function StatCard({ label, value }) {
   const gradientStyle = {
     backgroundImage: `
-      linear-gradient(90deg, transparent, ${colorValue}, transparent),
-      linear-gradient(90deg, transparent, ${colorValue}, transparent)
+      linear-gradient(90deg, transparent, #3b82f6, transparent),
+      linear-gradient(90deg, transparent, #3b82f6, transparent)
     `,
     backgroundPosition: 'top, bottom',
     backgroundSize: '100% 2px',
@@ -21,7 +13,7 @@ function StatCard({ label, value, color }) {
   };
 
   return (
-    <div className={`bg-gray-800 rounded-lg shadow p-6 border-l-4 ${color}`} style={gradientStyle}>
+    <div className="bg-gray-800 rounded-lg shadow p-6" style={gradientStyle}>
       <div className="text-gray-400 text-sm font-medium">{label}</div>
       <div className="text-3xl font-bold text-gray-100 mt-2">{value}</div>
     </div>
@@ -63,22 +55,18 @@ export default function DashboardHome() {
         <StatCard
           label="Total Sales"
           value={stats?.total_sales || 0}
-          color="border-blue-500"
         />
         <StatCard
           label="Total Revenue"
           value={`$${totalRevenue}`}
-          color="border-green-500"
         />
         <StatCard
           label="Average Ticket"
           value={`$${avgTicket}`}
-          color="border-purple-500"
         />
         <StatCard
           label="Unique Customers"
           value={stats?.unique_customers || 0}
-          color="border-orange-500"
         />
       </div>
 
