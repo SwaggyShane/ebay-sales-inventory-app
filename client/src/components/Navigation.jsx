@@ -37,7 +37,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
 
             <button
               onClick={logout}
-              className="ml-4 px-4 py-2 bg-red-600 hover:shadow-lg hover:shadow-red-600/50 text-white text-sm font-medium rounded-md"
+              className="ml-4 px-4 py-2 bg-blue-600 hover:shadow-xl hover:shadow-blue-500 text-white text-sm font-medium rounded-md"
             >
               Logout
             </button>
