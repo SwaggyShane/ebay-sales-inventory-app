@@ -132,16 +132,16 @@ export default function EbaySyncPage() {
               <button
                 type="submit"
                 disabled={configuring}
-                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition disabled:opacity-50"
+                className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition disabled:opacity-50"
               >
                 {configuring ? 'Configuring...' : 'Configure Credentials'}
               </button>
             </form>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
-            <h3 className="font-semibold text-blue-900 mb-2">Setup Instructions</h3>
-            <ol className="text-sm text-blue-200 space-y-2 list-decimal list-inside">
+          <div className="bg-gray-800 border border-blue-500/30 rounded-lg p-4 mt-6">
+            <h3 className="font-semibold text-blue-400 mb-2">Setup Instructions</h3>
+            <ol className="text-sm text-gray-300 space-y-2 list-decimal list-inside">
               <li>Log in to your eBay Developer account</li>
               <li>Generate a new OAuth token from the API documentation</li>
               <li>Copy the auth token and paste it above</li>

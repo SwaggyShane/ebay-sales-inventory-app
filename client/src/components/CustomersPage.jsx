@@ -112,7 +112,7 @@ export default function CustomersPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition disabled:opacity-50"
+                className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition disabled:opacity-50"
               >
                 {loading ? 'Adding...' : 'Add Customer'}
               </button>

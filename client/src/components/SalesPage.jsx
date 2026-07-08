@@ -198,7 +198,7 @@ export default function SalesPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 p-3 rounded-md">
+              <div className="bg-gray-700 p-3 rounded-md border border-blue-500/30">
                 <div className="text-sm text-gray-400">Total:</div>
                 <div className="text-2xl font-bold text-blue-400">${total_amount.toFixed(2)}</div>
               </div>
@@ -221,7 +221,7 @@ export default function SalesPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition disabled:opacity-50"
+                className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition disabled:opacity-50"
               >
                 {loading ? 'Adding...' : 'Add Sale'}
               </button>

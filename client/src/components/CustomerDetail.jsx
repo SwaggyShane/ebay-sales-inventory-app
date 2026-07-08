@@ -208,7 +208,7 @@ export default function CustomerDetail({ customerId, onBack }) {
 
               <button
                 type="submit"
-                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition text-sm"
+                className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition text-sm"
               >
                 Add Note
               </button>

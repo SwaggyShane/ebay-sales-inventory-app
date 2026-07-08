@@ -2,8 +2,26 @@ import { useEffect } from 'react';
 import { useStore } from '../store';
 
 function StatCard({ label, value, color }) {
+  const colorMap = {
+    'border-blue-500': '#3b82f6',
+    'border-green-500': '#10b981',
+    'border-purple-500': '#a855f7',
+    'border-orange-500': '#f97316',
+  };
+
+  const colorValue = colorMap[color] || '#3b82f6';
+  const gradientStyle = {
+    backgroundImage: `
+      linear-gradient(90deg, transparent, ${colorValue}, transparent),
+      linear-gradient(90deg, transparent, ${colorValue}, transparent)
+    `,
+    backgroundPosition: 'top, bottom',
+    backgroundSize: '100% 2px',
+    backgroundRepeat: 'no-repeat',
+  };
+
   return (
-    <div className={`bg-gray-800 rounded-lg shadow p-6 border-l-4 ${color}`}>
+    <div className={`bg-gray-800 rounded-lg shadow p-6 border-l-4 ${color}`} style={gradientStyle}>
       <div className="text-gray-400 text-sm font-medium">{label}</div>
       <div className="text-3xl font-bold text-gray-100 mt-2">{value}</div>
     </div>
